@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SlugRide Listings | UCSC student rideshare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="subpage-hero">
+      <nav class="topbar">
+        <a class="brand brand-link" href="index.html">
+          <span class="brand-mark">S</span>
+          <div>
+            <p>SlugRide</p>
+            <span>Student rides for UCSC</span>
+          </div>
+        </a>
+        <div class="nav-actions">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link active" href="listings.html">Current listings</a>
+          <div class="auth-actions">
+            <button class="secondary-button compact" id="signInButton" type="button">Sign in with Google</button>
+            <button class="ghost-button compact" id="signOutButton" type="button" hidden>Sign out</button>
+            <button class="ghost-button" id="profileButton" type="button" disabled>Edit profile</button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="auth-banner" id="authBanner">
+        <div>
+          <p class="eyebrow">Account status</p>
+          <strong id="authHeadline">Demo mode</strong>
+        </div>
+        <p id="authStatusText">Add Supabase config to turn on Google sign-in, shared listings, and account-based messaging.</p>
+      </div>
+
+      <div class="subpage-copy">
+        <p class="eyebrow">Current ride board</p>
+        <h1>Browse offers and requests, then message privately.</h1>
+        <p class="hero-text">This page is focused on discovery: search by route, filter by type, compare timing, and start a private conversation without exposing contact info publicly.</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel board-panel" id="boardSection">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Browse rides</p>
+            <h2>Find what works for your schedule</h2>
+          </div>
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="Search SJC, LA, San Jose, Monterey...">
+            <select id="typeFilter">
+              <option value="all">All posts</option>
+              <option value="offer">Ride offers</option>
+              <option value="request">Ride requests</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="board-layout">
+          <div class="listing-column">
+            <div class="column-head">
+              <h3>Current listings</h3>
+              <span id="resultsLabel">0 results</span>
+            </div>
+            <div id="listingGrid" class="listing-grid"></div>
+          </div>
+
+          <aside class="message-column">
+            <div class="column-head">
+              <h3>In-app messages</h3>
+              <span>Account-based and private</span>
+            </div>
+            <div class="message-shell">
+              <div class="thread-list" id="threadList"></div>
+              <div class="chat-panel">
+                <div class="chat-header" id="chatHeader">
+                  <strong>Select a conversation</strong>
+                  <span>Open a ride card and tap message</span>
+                </div>
+                <div class="chat-log" id="chatLog"></div>
+                <form class="chat-form" id="chatForm">
+                  <input id="chatInput" type="text" maxlength="280" placeholder="Ask about pickup spots, luggage, timing..." disabled>
+                  <button type="submit" class="primary-button compact" disabled id="chatSendButton">Send</button>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="profileDialog" class="profile-dialog">
+    <form method="dialog" class="profile-card" id="profileForm">
+      <div class="dialog-head">
+        <h2>Your profile</h2>
+        <button type="submit" class="ghost-button">Close</button>
+      </div>
+      <label>
+        Display name
+        <input type="text" name="displayName" placeholder="Your name">
+      </label>
+      <label>
+        UCSC affiliation
+        <input type="text" name="affiliation" placeholder="Third-year, Cowell, etc.">
+      </label>
+      <label>
+        About you
+        <textarea name="bio" rows="4" placeholder="Anything that helps people feel comfortable riding with you."></textarea>
+      </label>
+      <button type="button" class="primary-button" id="saveProfileButton">Save profile</button>
+    </form>
+  </dialog>
+
+  <template id="listingTemplate">
+    <article class="listing-card">
+      <div class="card-top">
+        <span class="pill type-pill"></span>
+        <span class="post-time"></span>
+      </div>
+      <h3 class="route-line"></h3>
+      <p class="meta-line"></p>
+      <div class="detail-grid">
+        <span class="detail-chip seats-chip"></span>
+        <span class="detail-chip vehicle-chip"></span>
+      </div>
+      <p class="notes-line"></p>
+      <div class="card-bottom">
+        <div class="author-block">
+          <strong class="author-name"></strong>
+          <span class="author-affiliation"></span>
+        </div>
+        <button type="button" class="secondary-button compact message-trigger">Message</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

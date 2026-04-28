@@ -1,0 +1,2 @@
+window.SLUGRIDE_SUPABASE_URL = "https://pophqgyaklobiqhlqiam.supabase.co";
+window.SLUGRIDE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvcGhxZ3lha2xvYmlxaGxxaWFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNTI5MTYsImV4cCI6MjA5MjgyODkxNn0.ERb6s7whLVG03VtZKKhCV0M9c_-6A8GRvVVw0sa2w5M";

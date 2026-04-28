@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SlugRide | UCSC student rideshare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <a class="brand brand-link" href="index.html">
+          <span class="brand-mark">S</span>
+          <div>
+            <p>SlugRide</p>
+            <span>Student rides for UCSC</span>
+          </div>
+        </a>
+        <div class="nav-actions">
+          <a class="nav-link active" href="index.html">Home</a>
+          <a class="nav-link" href="listings.html">Current listings</a>
+          <div class="auth-actions">
+            <button class="secondary-button compact" id="signInButton" type="button">Sign in with Google</button>
+            <button class="ghost-button compact" id="signOutButton" type="button" hidden>Sign out</button>
+            <button class="ghost-button" id="profileButton" type="button" disabled>Edit profile</button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="auth-banner" id="authBanner">
+        <div>
+          <p class="eyebrow">Account status</p>
+          <strong id="authHeadline">Demo mode</strong>
+        </div>
+        <p id="authStatusText">Add Supabase config to turn on Google sign-in, shared listings, and account-based messaging.</p>
+      </div>
+
+      <div class="hero-grid">
+        <section class="hero-copy">
+          <p class="eyebrow">Built for breaks, airport runs, and last-minute plans</p>
+          <h1>Ridesharing for UCSC students, without public contact info.</h1>
+          <p class="hero-text">
+            SlugRide helps Banana Slugs offer rides, request rides, and connect privately inside the app.
+            Whether someone is heading to SJC, back to LA for break, or anywhere else during the year,
+            they can post the trip, browse options, and message safely before sharing personal details.
+          </p>
+          <div class="hero-actions">
+            <a href="#offerSection" class="primary-button">Offer a ride</a>
+            <a href="#requestSection" class="secondary-button">Request a ride</a>
+            <a href="listings.html" class="secondary-button">Browse listings</a>
+          </div>
+          <div class="trust-strip">
+            <span>Private messaging</span>
+            <span>Search by route + date</span>
+            <span>Built for UCSC students</span>
+          </div>
+        </section>
+
+        <aside class="hero-card">
+          <p class="card-label">Live board</p>
+          <div class="metric-row">
+            <div>
+              <strong id="offerCount">0</strong>
+              <span>offers</span>
+            </div>
+            <div>
+              <strong id="requestCount">0</strong>
+              <span>requests</span>
+            </div>
+            <div>
+              <strong id="messageCount">0</strong>
+              <span>chats</span>
+            </div>
+          </div>
+          <div class="mini-list" id="heroPreview"></div>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel intro-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">How it works</p>
+            <h2>Three simple steps for riders and drivers</h2>
+          </div>
+          <a href="listings.html" class="secondary-button">See current listings</a>
+        </div>
+        <div class="story-grid">
+          <article>
+            <span class="story-step">01</span>
+            <h3>Post your plan</h3>
+            <p>Drivers can share route, departure time, available seats, and car details. Riders can post where they need to go and when.</p>
+          </article>
+          <article>
+            <span class="story-step">02</span>
+            <h3>Browse and compare</h3>
+            <p>Students can look through current offers and requests, then choose what fits their timing, destination, and comfort level.</p>
+          </article>
+          <article>
+            <span class="story-step">03</span>
+            <h3>Message privately</h3>
+            <p>First contact happens inside the app, so people can discuss pickup spots, luggage, and timing before sharing anything personal.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel roadmap-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">What students need</p>
+            <h2>Useful for airport runs, holiday breaks, and everything in between</h2>
+          </div>
+        </div>
+        <div class="roadmap-grid">
+          <article>
+            <h3>SJC and Bay Area</h3>
+            <p>Perfect for airport dropoffs, Caltrain connections, or quick rides over the hill.</p>
+          </article>
+          <article>
+            <h3>Long-distance breaks</h3>
+            <p>Students heading to LA, San Diego, Sacramento, or elsewhere can post early and coordinate before school breaks.</p>
+          </article>
+          <article>
+            <h3>Anytime requests</h3>
+            <p>Not every ride is tied to a holiday. The board works year-round for internships, concerts, family visits, and spontaneous trips.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="forms-grid">
+        <section class="panel form-panel" id="offerSection">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Driver post</p>
+              <h2>Offer a ride</h2>
+            </div>
+          </div>
+          <form id="offerForm" class="ride-form">
+            <label>
+              Display name
+              <input type="text" name="name" placeholder="Sign in to auto-fill from your profile" required>
+            </label>
+            <label>
+              Leaving from
+              <input type="text" name="from" placeholder="UCSC / Santa Cruz" required>
+            </label>
+            <label>
+              Going to
+              <input type="text" name="to" placeholder="SJC Airport" required>
+            </label>
+            <label>
+              Departure
+              <input type="datetime-local" name="datetime" required>
+            </label>
+            <label>
+              Seats available
+              <input type="number" name="seats" min="1" max="8" value="3" required>
+            </label>
+            <label>
+              Vehicle
+              <input type="text" name="vehicle" placeholder="Blue Toyota Corolla" required>
+            </label>
+            <label class="full-width">
+              Notes
+              <textarea name="notes" rows="4" placeholder="Room for luggage, pickup spot, gas split details, or anything else riders should know."></textarea>
+            </label>
+            <button type="submit" class="primary-button" id="offerSubmitButton">Post offer</button>
+          </form>
+        </section>
+
+        <section class="panel form-panel" id="requestSection">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Passenger post</p>
+              <h2>Request a ride</h2>
+            </div>
+          </div>
+          <form id="requestForm" class="ride-form">
+            <label>
+              Display name
+              <input type="text" name="name" placeholder="Sign in to auto-fill from your profile" required>
+            </label>
+            <label>
+              Need pickup from
+              <input type="text" name="from" placeholder="Porter College" required>
+            </label>
+            <label>
+              Need to go to
+              <input type="text" name="to" placeholder="Los Angeles" required>
+            </label>
+            <label>
+              Ideal departure
+              <input type="datetime-local" name="datetime" required>
+            </label>
+            <label>
+              Riders
+              <input type="number" name="seats" min="1" max="4" value="1" required>
+            </label>
+            <label>
+              Budget / contribution
+              <input type="text" name="vehicle" placeholder="$25-40 for gas">
+            </label>
+            <label class="full-width">
+              Notes
+              <textarea name="notes" rows="4" placeholder="Mention timing flexibility, bags, or anything helpful for drivers to know."></textarea>
+            </label>
+            <button type="submit" class="primary-button" id="requestSubmitButton">Post request</button>
+          </form>
+        </section>
+      </section>
+
+      <section class="panel cta-panel">
+        <div>
+          <p class="eyebrow">Next stop</p>
+          <h2>Ready to browse what's already posted?</h2>
+          <p class="hero-text">The listings page separates discovery from posting, which is a good fit for the Supabase-backed version with shared ride data and private account-based messaging.</p>
+        </div>
+        <a href="listings.html" class="primary-button">Go to current listings</a>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="profileDialog" class="profile-dialog">
+    <form method="dialog" class="profile-card" id="profileForm">
+      <div class="dialog-head">
+        <h2>Your profile</h2>
+        <button type="submit" class="ghost-button">Close</button>
+      </div>
+      <label>
+        Display name
+        <input type="text" name="displayName" placeholder="Your name">
+      </label>
+      <label>
+        UCSC affiliation
+        <input type="text" name="affiliation" placeholder="Third-year, Cowell, etc.">
+      </label>
+      <label>
+        About you
+        <textarea name="bio" rows="4" placeholder="Anything that helps people feel comfortable riding with you."></textarea>
+      </label>
+      <button type="button" class="primary-button" id="saveProfileButton">Save profile</button>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
