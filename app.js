@@ -566,7 +566,7 @@ function startRealtimeSubscription() {
         schema: "public",
         table: "conversation_members",
       },
-      () => queueRealtimeRefresh()
+      () => setTimeout(() => queueRealtimeRefresh(), 800)
     )
     .on(
       "postgres_changes",
