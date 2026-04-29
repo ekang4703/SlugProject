@@ -93,28 +93,4 @@ Live site: [slug-project.vercel.app](https://slug-project.vercel.app)
 4. User A sees two separate threads in their inbox, one for each person who messaged them
 5. All messages are private — only the two members of a conversation can see its contents, enforced by RLS
 
----
-
-## Running locally
-
-You need Python installed. From the project folder run:
-
-```
-python -m http.server 4173
-```
-
-Then open `http://127.0.0.1:4173` in your browser.
-
----
-
-## Setting up Supabase from scratch
-
-1. Create a new project at [supabase.com](https://supabase.com)
-2. Copy your project URL and anon key into `supabase-config.js`
-3. Open the SQL editor and run `supabase/schema.sql`
-4. Go to Authentication → Providers → Google and enable Google OAuth
-5. Add your Google OAuth client ID and secret
-6. Add your local and production URLs to Supabase's allowed redirect URLs
-7. Add your domain as an authorized JavaScript origin in Google Cloud Console
-
 
