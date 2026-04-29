@@ -368,7 +368,8 @@ function renderChat() {
     `;
     els.chatLog.appendChild(bubble);
   });
-  els.chatLog.scrollTop = els.chatLog.scrollHeight;
+  const isNearBottom = els.chatLog.scrollHeight - els.chatLog.scrollTop - els.chatLog.clientHeight < 80;
+  if (isNearBottom) els.chatLog.scrollTop = els.chatLog.scrollHeight;
   els.chatInput.disabled = !state.user;
   els.chatSendButton.disabled = !state.user;
 }
