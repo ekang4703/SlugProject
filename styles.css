@@ -522,6 +522,7 @@ main {
 .message-shell {
   gap: 14px;
   min-height: 580px;
+  max-height: 580px;
 }
 
 .thread-list,
@@ -570,8 +571,9 @@ main {
 
 .chat-log {
   padding: 16px;
-  overflow: auto;
+  overflow-y: auto;
   flex: 1;
+  max-height: 500px
 }
 
 .chat-message {
@@ -673,6 +675,14 @@ label {
   .thread-item {
     min-width: 180px;
   }
+  .message-shell {
+    height: 480px;
+    max-height: 480px;
+  }
+
+  .chat-log {
+    max-height: 380px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -705,5 +715,13 @@ label {
   .subpage-hero {
     padding: 18px;
     border-radius: 24px;
+  }
+  .message-shell {
+    height: 420px;
+    max-height: 420px;
+  }
+
+  .chat-log {
+    max-height: 320px;
   }
 }
