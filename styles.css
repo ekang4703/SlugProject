@@ -157,7 +157,7 @@ body::before {
   place-items: center;
   border-radius: 14px;
   background: var(--green);
-  color: var(--gold);
+  color: var(--gold) !important;
   font-weight: 700;
 }
 
