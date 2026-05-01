@@ -274,6 +274,33 @@ function renderListings() {
     node.querySelector(".notes-line").textContent = post.notes || "No extra notes yet.";
     node.querySelector(".author-name").textContent = post.name;
     node.querySelector(".author-affiliation").textContent = post.affiliation || "UCSC student";
+    const deleteButton = node.querySelector(".delete-trigger");
+    if (post.creatorId === state.user?.id) {
+      deleteButton.hidden = false;
+      deleteButton.addEventListener("click", async () => {
+        deleteButton.disabled = true;
+        deleteButton.textContent = "Deleting...";
+        try {
+          const { error } = await state.supabase
+            .from("ride_posts")
+            .delete()
+            .eq("id", post.id);
+          if (error) {
+            setBanner("Could not delete post", error.message, "warning");
+            deleteButton.disabled = false;
+            deleteButton.textContent = "Delete";
+          } else {
+            await loadRemotePosts();
+            renderAll();
+            setBanner("Post deleted", "Your ride listing has been removed.", "success");
+          }
+        } catch (err) {
+          setBanner("Could not delete post", err.message, "warning");
+          deleteButton.disabled = false;
+          deleteButton.textContent = "Delete";
+        }
+      });
+    }
     button.addEventListener("click", async () => {
       button.disabled = true;
       const originalLabel = button.textContent;
