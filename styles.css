@@ -648,7 +648,17 @@ label {
   color: var(--muted);
   background: rgba(255, 255, 255, 0.45);
 }
-
+.disclaimer {
+  margin-top: 24px;
+  padding: 18px 24px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.45);
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  text-align: center;
+}
 @media (max-width: 1080px) {
   .hero-grid,
   .board-layout,
@@ -723,16 +733,5 @@ label {
 
   .chat-log {
     max-height: 320px;
-  }
-  .disclaimer {
-    margin-top: 24px;
-    padding: 18px 24px;
-    border-radius: 16px;
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.45);
-    color: var(--muted);
-    font-size: 0.82rem;
-    line-height: 1.6;
-    text-align: center;
   }
 }
